@@ -8,12 +8,83 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeMobileMenu();
     initializeCart(); // Initialize cart functionality
     
+    // Detect platform for specific optimizations
+    detectPlatform();
+    
     // Add window resize listener for responsive adjustments
     window.addEventListener('resize', handleResponsiveLayout);
     
     // Initial call to handle layout based on current window size
     handleResponsiveLayout();
 });
+
+// Detect platform (iOS, Android, or desktop)
+function detectPlatform() {
+    const userAgent = navigator.userAgent.toLowerCase();
+    let platform = 'desktop';
+    
+    if (/iphone|ipad|ipod/.test(userAgent)) {
+        platform = 'ios';
+        document.body.classList.add('ios-device');
+    } else if (/android/.test(userAgent)) {
+        platform = 'android';
+        document.body.classList.add('android-device');
+    }
+    
+    // Apply platform-specific optimizations
+    if (platform === 'ios' || platform === 'android') {
+        applyMobileOptimizations(platform);
+    }
+}
+
+// Apply mobile-specific optimizations
+function applyMobileOptimizations(platform) {
+    // Enhance touch targets
+    const clickableElements = document.querySelectorAll('a, button, .border, .panel-ops p, .panel-all, .panel-deals');
+    clickableElements.forEach(el => {
+        el.classList.add('touch-target');
+    });
+    
+    // iOS specific adjustments
+    if (platform === 'ios') {
+        // Fix for iOS Safari's 100vh issue
+        const fixHeight = () => {
+            document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+        };
+        
+        window.addEventListener('resize', fixHeight);
+        window.addEventListener('orientationchange', fixHeight);
+        fixHeight();
+    }
+    
+    // Add swipe gestures for carousel
+    const carouselItems = document.querySelector('.carousel-items');
+    if (carouselItems) {
+        let startX, endX;
+        const threshold = 50; // Minimum distance for swipe
+        
+        carouselItems.addEventListener('touchstart', function(e) {
+            startX = e.touches[0].clientX;
+        });
+        
+        carouselItems.addEventListener('touchend', function(e) {
+            endX = e.changedTouches[0].clientX;
+            
+            const diff = startX - endX;
+            
+            // If the swipe distance is greater than the threshold
+            if (Math.abs(diff) > threshold) {
+                if (diff > 0) {
+                    // Swipe left - go to next item
+                    document.querySelector('.carousel-next')?.click();
+                } else {
+                    // Swipe right - go to previous item
+                    document.querySelector('.carousel-prev')?.click();
+                }
+            }
+        });
+    }
+}
 
 // Handle dropdown menus for account and lists
 function initializeNavDropdowns() {
@@ -399,7 +470,7 @@ function createCartDropdown(cartElement) {
     });
 }
 
-// Toggle cart dropdown display
+// Toggle cart dropdown display - enhanced for mobile
 function toggleCartDropdown() {
     const cartDropdown = document.querySelector('.cart-dropdown');
     const overlay = document.querySelector('.cart-overlay');
@@ -410,6 +481,16 @@ function toggleCartDropdown() {
         
         if (cartDropdown.classList.contains('active')) {
             document.body.style.overflow = 'hidden';
+            
+            // On mobile, scroll to top of cart
+            if (window.innerWidth <= 768) {
+                setTimeout(() => {
+                    const cartItemsContainer = cartDropdown.querySelector('.cart-items-container');
+                    if (cartItemsContainer) {
+                        cartItemsContainer.scrollTop = 0;
+                    }
+                }, 100);
+            }
         } else {
             document.body.style.overflow = '';
         }
@@ -690,9 +771,46 @@ function updateCartCount(count) {
     }
 }
 
-// Responsive layout adjustments
+// Responsive layout adjustments - enhanced for all phone sizes
 function handleResponsiveLayout() {
     const width = window.innerWidth;
+    
+    // Check if we're on a phone
+    const isPhone = width <= 768;
+    
+    // Apply special phone optimizations
+    if (isPhone) {
+        document.body.classList.add('mobile-view');
+        
+        // Make touchable elements larger
+        const touchTargets = document.querySelectorAll('.touch-target');
+        touchTargets.forEach(target => {
+            target.style.minHeight = '44px'; // Apple's recommended minimum touch target size
+        });
+        
+        // Adjust product box heights for better display
+        const productBoxes = document.querySelectorAll('.box');
+        productBoxes.forEach(box => {
+            const boxImg = box.querySelector('.box-img');
+            if (boxImg) {
+                if (width <= 375) { // iPhone SE size
+                    boxImg.style.height = '180px';
+                } else if (width <= 430) { // iPhone 12/13/14 size
+                    boxImg.style.height = '200px';
+                } else {
+                    boxImg.style.height = '220px';
+                }
+            }
+            
+            // Always show "Add to Cart" button on mobile
+            const addToCartBtn = box.querySelector('.add-to-cart-btn');
+            if (addToCartBtn) {
+                addToCartBtn.style.display = 'block';
+            }
+        });
+    } else {
+        document.body.classList.remove('mobile-view');
+    }
     
     // Adjust shop section based on width
     const boxes = document.querySelectorAll('.box');
@@ -723,9 +841,31 @@ function handleResponsiveLayout() {
     const carouselItems = document.querySelector('.carousel-items');
     if (carouselItems) {
         const items = carouselItems.querySelectorAll('.carousel-item');
-        const itemWidth = width <= 480 ? 100 : (width <= 768 ? 50 : (width <= 992 ? 33.33 : 25));
+        
+        // More specific breakpoints for phone sizes
+        let itemWidth;
+        if (width <= 375) { // Small phones like iPhone SE
+            itemWidth = 90;
+        } else if (width <= 480) { // Medium phones
+            itemWidth = 85;
+        } else if (width <= 768) { // Large phones and small tablets
+            itemWidth = 45;
+        } else if (width <= 992) { // Tablets
+            itemWidth = 33.33;
+        } else { // Desktop
+            itemWidth = 25;
+        }
+        
         items.forEach(item => {
             item.style.width = `${itemWidth}%`;
+            
+            // Adjust image height for better aspect ratio on phones
+            const itemImage = item.querySelector('.carousel-item-image');
+            if (itemImage && width <= 480) {
+                itemImage.style.height = '120px';
+            } else if (itemImage) {
+                itemImage.style.height = '150px';
+            }
         });
     }
 } 

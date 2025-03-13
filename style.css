@@ -485,6 +485,37 @@ footer {
     .footer-col {
         width: 100%;
     }
+    
+    .box .add-to-cart-btn {
+        display: block;
+        width: 100%;
+        margin: 10px auto 0;
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+    
+    .panel-ops p, .panel-all, .panel-deals {
+        padding: 10px;
+        margin: 0 5px;
+    }
+    
+    .border {
+        padding: 8px;
+    }
+    
+    .cart-dropdown {
+        width: 100%;
+        right: -100%;
+    }
+    
+    .cart-dropdown.active {
+        right: 0;
+    }
+    
+    .footer-links a {
+        margin: 0 5px;
+        font-size: 0.8rem;
+    }
 }
 
 @media screen and (max-width: 480px) {
@@ -525,6 +556,64 @@ footer {
     .hero-msg {
         width: 95%;
         padding: 5px 10px;
+    }
+    
+    .cart-checkout-btn, .cart-view-btn {
+        padding: 12px;
+        font-size: 1rem;
+        border-radius: 5px;
+    }
+    
+    .cart-item {
+        padding: 10px 0;
+    }
+    
+    .cart-item-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .cart-item-quantity {
+        margin-bottom: 10px;
+        width: 100%;
+    }
+    
+    .cart-item-delete {
+        padding: 5px 0;
+    }
+    
+    .dropdown-content {
+        width: 100vw;
+        right: -70px;
+        padding: 20px 0;
+    }
+    
+    .dropdown-signin-btn a {
+        padding: 12px;
+    }
+    
+    .dropdown-section a {
+        padding: 10px 0;
+        font-size: 0.9rem;
+    }
+    
+    .cart-confirmation {
+        width: 90%;
+        left: 5%;
+        right: auto;
+    }
+    
+    .cart-confirmation.active {
+        right: auto;
+    }
+    
+    .cart-confirmation-message {
+        padding: 15px 10px;
+    }
+    
+    .carousel-prev, .carousel-next {
+        width: 35px;
+        height: 35px;
     }
 }
 
@@ -1115,4 +1204,247 @@ footer {
 
 .box:hover .add-to-cart-btn {
     display: block;
+}
+
+/* iPhone SE, Galaxy S8, Pixel 3a - Very small phones */
+@media screen and (max-width: 375px) {
+    .navbar {
+        padding: 3px;
+    }
+    
+    .nav-logo {
+        width: 70px;
+        margin: 0 5px;
+    }
+    
+    .logo {
+        background-size: contain;
+    }
+    
+    .nav-search {
+        height: 35px;
+    }
+    
+    .search-select {
+        width: 40px;
+        font-size: 0.8rem;
+    }
+    
+    .Search-input {
+        font-size: 0.9rem;
+    }
+    
+    .searc-icon {
+        width: 35px;
+    }
+    
+    .nav-singin, .nav-cart {
+        font-size: 0.7rem;
+    }
+    
+    .nav-cart i {
+        font-size: 20px;
+    }
+    
+    .box-img {
+        height: 220px;
+    }
+    
+    .hero-section {
+        height: 150px;
+    }
+    
+    .hero-msg {
+        width: 95%;
+        padding: 5px;
+        font-size: 0.7rem;
+    }
+    
+    /* Smaller carousel items */
+    .carousel-item {
+        padding: 5px;
+    }
+    
+    .carousel-item-name {
+        font-size: 0.8rem;
+        height: 35px;
+    }
+    
+    .carousel-item-price {
+        font-size: 0.9rem;
+    }
+    
+    .carousel-item-discount {
+        font-size: 0.75rem;
+    }
+    
+    /* Improve form elements for better touch */
+    .add-to-cart-btn {
+        padding: 10px 5px;
+        font-size: 0.9rem;
+    }
+    
+    .cart-item-quantity {
+        padding: 8px 5px;
+        font-size: 1rem;
+        width: 60px;
+    }
+    
+    .cart-item-delete {
+        font-size: 0.9rem;
+        padding: 5px;
+    }
+}
+
+/* iPhone 12/13/14, Galaxy S20/S21 - Medium sized phones */
+@media screen and (min-width: 376px) and (max-width: 430px) {
+    .navbar {
+        padding: 4px;
+    }
+    
+    .nav-logo {
+        width: 75px;
+    }
+    
+    .box-img {
+        height: 240px;
+    }
+    
+    /* Larger touch targets for links */
+    .panel-ops p, .panel-all, .panel-deals {
+        padding: 10px;
+    }
+    
+    .footer-links a {
+        padding: 8px 5px;
+    }
+}
+
+/* iPhone Pro Max, Galaxy Note - Large phones */
+@media screen and (min-width: 431px) and (max-width: 480px) {
+    .navbar {
+        padding: 5px;
+    }
+    
+    .box-img {
+        height: 250px;
+    }
+}
+
+/* Orientation specific adjustments */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .navbar {
+        height: 50px;
+    }
+    
+    .nav-logo {
+        height: 40px;
+    }
+    
+    .hero-section {
+        height: 200px;
+    }
+    
+    .box-img {
+        height: 180px;
+    }
+    
+    /* Make the cart dropdown shorter in landscape */
+    .cart-dropdown {
+        top: 50px;
+        height: calc(100% - 50px);
+    }
+    
+    /* Adjust footer for landscape orientation */
+    .footer-panel1 {
+        height: 40px;
+    }
+    
+    .footer-panel2 {
+        padding: 20px 0;
+    }
+}
+
+/* Mobile Touch Optimizations */
+.touch-target {
+    min-height: 44px; /* Apple's recommended minimum touch target size */
+    min-width: 44px;
+}
+
+/* Platform specific styling */
+.ios-device .add-to-cart-btn, 
+.ios-device .cart-checkout-btn, 
+.ios-device .cart-view-btn {
+    /* iOS specific button styling */
+    -webkit-appearance: none;
+    border-radius: 8px;
+}
+
+.ios-device .search-select, 
+.ios-device .cart-item-quantity {
+    /* Fix for iOS select styling */
+    background-color: #f8f8f8;
+    font-size: 16px; /* Prevents zoom on focus */
+}
+
+.ios-device .Search-input {
+    /* Prevent zoom on input focus on iOS */
+    font-size: 16px;
+}
+
+.android-device .add-to-cart-btn, 
+.android-device .cart-checkout-btn, 
+.android-device .cart-view-btn {
+    /* Material Design influenced styling */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.android-device .add-to-cart-btn:active, 
+.android-device .cart-checkout-btn:active, 
+.android-device .cart-view-btn:active {
+    /* Material Design touch feedback */
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    background-color: #e7e7e7;
+}
+
+/* Fix 100vh issue on mobile browsers */
+.mobile-view .cart-dropdown {
+    height: calc(100 * var(--vh, 1vh));
+}
+
+.mobile-view .mobile-menu {
+    height: calc(100 * var(--vh, 1vh));
+}
+
+/* Mobile touch feedback */
+.mobile-view a:active,
+.mobile-view .panel-ops p:active,
+.mobile-view .panel-all:active,
+.mobile-view .panel-deals:active,
+.mobile-view .border:active {
+    background-color: rgba(0,0,0,0.05);
+}
+
+/* Better scrolling on mobile */
+.mobile-view .cart-items-container,
+.mobile-view .mobile-menu-content {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+}
+
+/* Improve cart animations on mobile */
+.mobile-view .cart-confirmation {
+    bottom: 20px;
+    top: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 320px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-radius: 8px;
+}
+
+.mobile-view .cart-confirmation.active {
+    right: auto;
 }
