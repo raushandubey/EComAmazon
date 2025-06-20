@@ -1,0 +1,33 @@
+# Amazon Clone
+
+## Overview
+The Amazon Clone project is a web application that mimics the layout and functionality of the Amazon shopping platform. It features a user-friendly interface with a navigation bar, search functionality, product categories, and a shopping cart. The project is designed to provide a seamless online shopping experience.
+
+## Project Structure
+The project consists of the following files:
+
+- **index.html**: The main HTML document that contains the structure of the webpage, including the header, navigation bar, hero section, shop sections, and footer. It links to external stylesheets and scripts.
+- **style.css**: The CSS file that defines the layout, colors, fonts, and other visual aspects of the webpage, ensuring a cohesive and appealing design.
+- **script.js**: The JavaScript file intended for adding interactivity to the project. It can handle user input, manage the shopping cart, and implement other dynamic features.
+
+## Installation
+To run the Amazon Clone project locally, follow these steps:
+
+1. Clone the repository or download the project files.
+2. Open the `index.html` file in a web browser to view the application.
+
+## Usage
+- Navigate through the website using the navigation bar.
+- Use the search functionality to find products.
+- Explore different product categories.
+- Add items to the shopping cart for a simulated shopping experience.
+
+## Deployment
+This project was deployed by **Raushan Dubey**. You can deploy it by uploading the project files to any static hosting service (such as GitHub Pages, Netlify, or Vercel) or by serving them locally.
+
+## Contributing
+Contributions are welcome! If you would like to contribute to the project, please fork the repository and submit a pull request with your changes.
+
+## License
+
+This project is open-source and available under the MIT License.
